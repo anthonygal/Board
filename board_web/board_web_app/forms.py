@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import CustomUser
+from .models import CustomUser, Trip
 
 class CustomUserCreationForm(UserCreationForm):
 
@@ -13,3 +13,9 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ('username', 'email')
+
+class TripForm(forms.ModelForm):
+
+    class Meta:
+        model = Trip
+        fields = ('title', 'description', 'available_spots')

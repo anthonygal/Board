@@ -4,11 +4,17 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+
   Hi {{ user.username }}!
+  <a href="{% url 'browser' %}">Browse trips</a>
+  <a href="{% url 'trip_create' %}">Create trips</a>
   <p><a href="{% url 'logout' %}">logout</a></p>
+
 {% else %}
+
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">login</a> |
   <a href="{% url 'signup' %}">signup</a>
+
 {% endif %}
 {% endblock %}

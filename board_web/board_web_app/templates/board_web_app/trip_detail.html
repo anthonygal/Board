@@ -1,1 +1,17 @@
-{{ trip }}
+{% block content %}
+    <div class="trip">
+        {% if trip.pub_date %}
+            <div class="date">
+                {{ post.pub_date }}
+            </div>
+        {% endif %}
+
+        {% if user.is_authenticated and user == trip.organiser %}
+		    <a href="{% url 'trip_edit' pk=trip.pk %}"> Edit </a>
+		    <a href="{% url 'trip_delete' pk=trip.pk %}"> Delete </a>
+		{% endif %}
+
+        <h2>{{ trip.title }}</h2>
+        <p>{{ trip.description|linebreaksbr }}</p>
+    </div>
+{% endblock %}
