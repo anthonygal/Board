@@ -1,17 +1,23 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.template import loader
-from .models import trip
-# Create your views here.
-from django.http import HttpResponse
+from django.urls import reverse_lazy
+from django.views import generic
 
+from .forms import CustomUserCreationForm
+from .models import Trip
 
 def index(request):
-    latest_trips_list = trip.objects.order_by('-pub_date')[:5]
-    template = loader.get_template('board_web_app/index.html')
+    latest_trips_list = Trip.objects.order_by('-pub_date')[:5]
     context = {
         'latest_trips_list': latest_trips_list,
     }
-    return HttpResponse(template.render(context, request))
+    return render(request, 'board_web_app/index.html', context)
 
-def detail(request, question_id):
-	return HttpResponse("You're looking at trip %s." % trip_id)
+def trip_detail(request, trip_id):
+	trip = get_object_or_404(Trip, pk=trip_id)
+	return render(request, 'board_web_app/trip_detail.html', {'trip': trip})
+
+class SignUp(generic.CreateView):
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'signup.html'
