@@ -1,0 +1,9 @@
+{% if latest_trips_list %}
+    <ul>
+    {% for trip in latest_trips_list %}
+        <li><a href="/board_web_app/{{ trip.id }}/">{{ trip.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No trips are available.</p>
+{% endif %}
