@@ -1,3 +1,7 @@
+
+{% extends 'board_web_app/base.html' %}
+{% block content %}
+
 {% if user.is_authenticated %}
 
 	{% if latest_trips_list %}
@@ -17,3 +21,6 @@
   <a href="{% url 'login' %}">login</a> |
   <a href="{% url 'signup' %}">signup</a>
 {% endif %}
+
+
+{% endblock %}
